@@ -1,0 +1,47 @@
+#include<stdio.h>
+int main()
+{
+	char a;
+	int b,i,j,t,sum=0,f,s=0;
+	scanf("%d %c",&b,&a);
+	for(i=2;i;i++){
+		sum+=2*i-1;
+		if(sum>(b-1)/2){
+			break;
+		}
+		f+=1;
+	}
+	sum-=2*i-1;
+	sum=sum*2+1;
+	i-=1;
+	t=f;
+	while(f--){
+		for(j=0;j<s;j++){
+			printf(" ");
+		}
+		for(j=0;j<2*i-1;j++){		
+			printf("%c",a);
+			if(j==2*i-2){
+				printf("\n");
+			}
+		}
+		s+=1;
+		i-=1;
+	}
+	t+=1;
+	while(t--){
+		for(j=0;j<s;j++){
+			printf(" ");
+		}
+		for(j=0;j<2*i-1;j++){
+			printf("%c",a);
+			if(j==2*i-2){
+				printf("\n");
+			}
+		}
+		i+=1;
+		s-=1;	
+	}
+	printf("%d",b-sum);
+	return 0;
+}
