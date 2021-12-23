@@ -1,0 +1,39 @@
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+	int a;
+	scanf("%d",&a);
+	int i,j,x,f,sum,f1=0,f2,z;
+	x=sqrt(a);
+	for(i=2;i<x+1;i++){
+		sum=0;
+		f=a;
+		f2=i;
+		for(j=i;f%j==0 && f!=0;j++){
+			f/=j;
+			sum++;
+		}
+		if(sum>f1){
+			f1=sum;
+			z=f2;
+		}
+		
+	}
+	if(f1==0){
+		printf("1\n");
+		printf("%d",a);
+	}else{
+		printf("%d\n",f1);
+		for(i=0;i<f1;i++){
+			if(i!=f1-1){
+				printf("%d*",z);
+			}else{
+				printf("%d",z);
+			}
+				
+			z+=1;
+		}
+	}
+	return 0;
+}
