@@ -1,0 +1,19 @@
+n=int(input())
+a=set()
+for i in range(n):
+    a1=input().split()
+    a1.pop(0)
+    if len(a1)!=1:
+        for i in a1:
+            a.add(i)
+m=int(input())
+b=[]
+x=input().split()
+c=0
+for i in x:
+    if i not in a and i not in b:
+        b.append(i)
+if  len(b)==0:
+    print('No one is handsome')
+else:
+    print(' '.join(b))
