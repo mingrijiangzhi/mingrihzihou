@@ -1,0 +1,32 @@
+a=list(input())
+sum=0
+flag=0
+t=0
+for i in range(len(a)):
+    if a[i]=='6':
+        sum+=1
+        t=i
+        flag=1
+    if a[i]!='6':
+        if sum > 9:
+            a[i-1]='27'
+            for j in range(i-2,i-1-sum,-1):
+                a[j]='*'
+        elif sum > 3:
+            a[i-1]='9'
+            for j in range(i-2,i-1-sum,-1):
+                a[j]='*'
+        sum=0
+        flag=0
+if flag==1:
+    if sum > 9:
+        a[t]='27'
+        for j in range(t-1,t-sum,-1):
+            a[j]='*'
+    elif sum > 3:
+        a[t]='9'
+        for j in range(t-1,t-sum,-1):
+            a[j]='*'
+a=''.join(a)
+a=a.replace('*','')
+print(a)
