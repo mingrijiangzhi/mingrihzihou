@@ -1,0 +1,51 @@
+x=input()
+x=x.split()
+if len(x)==1:
+    a=' '
+    b=x[0]
+else:
+    a=x[0]
+    b=x[1]
+f1=f2=1
+if len(x)>2:
+    f2=0
+c='0123456789'
+if a=='0':
+    if b=='0':
+        f1=f2=0
+    else:
+        f1=0
+else:
+    if b=='0':
+        f2=0
+for i in a:
+    if i not in c:
+        f1=0
+        break
+for i in b:
+    if i not in c:
+        f2=0
+        break
+if f1==0:
+    if f2==0:
+        print("? + ? = ?")
+    elif int(b)>=1 and int(b)<=1000:
+        print("? + %d = ?"%int(b))
+    else:
+        print("? + ? = ?")
+elif f2==0:
+    if int(a) >= 1 and int(a) <= 1000:
+        print("%d + ? = ?" %int(a))
+    else:
+        print("? + ? = ?")
+else:
+    if int(a) >= 1 and int(a) <= 1000:
+        if int(b)>=1 and int(b)<=1000:
+            print("%d + %d = %d" % (int(a),int(b),int(a)+int(b)))
+        else:
+            print("%d + ? = ?" % int(a))
+    else:
+        if int(b) >= 1 and int(b) <= 1000:
+            print("? + %d = ?" % int(b))
+        else:
+            print("? + ? = ?")
