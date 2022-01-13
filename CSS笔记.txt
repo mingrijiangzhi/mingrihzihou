@@ -1,0 +1,206 @@
+@[TOC](CSS入门)
+# 前言
+HTML的局限性：只关注内容的语义
+CSS也是一门标记语言	
+	主要用于设置文本内容（字体，大小，对齐方式等）、图片的外形（宽高、边框样式、边距等）以及版面的布局和外观显示样式 ，简单来说，即美化HTML。
+最大的价值：由HTML专注于结构呈现，样式交给CSS，做到结构（HTML）与样式（CSS）相分离。
+#  简介
+## 语法规范
+语法规范：选择器（即要修饰的对像）   {要修改的样式}  
+选择器是用于指定CSS样式的HTML码标签，花括号内对应的是具体样式
+并且这些样式要放在**头部**里面，并且用以下格式书写：
+```
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>biu</title>
+    <style>
+        p {
+            color:red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+```
+**属性和属性值之间一定要加“ ：”，结尾一定要加“ ；”**
+## 代码风格
+不是强制要求的，但这种更符合实际开发的书写方式。
+### 样式格式
+展开式：
+```
+p {
+            color: red;
+            font-size: 12px;
+ }
+```
+### 样式大小写
+**统一采取小写格式，特殊情况除外**
+### 空格规范
+**属性值前面，冒号后面，保留一个空格**
+**选择器（标签）和花括号之间保留一个空格**
+# CSS选择器
+**选择器的作用**
+**用来选择要改变样式的标签**
+## 基础选择器
+基础选择器由单个选择器组成
+包括：标签选择器，类选择器，id选择器和通配符选择器
+### 标签选择器
+把HTML的标签名当作选择器，按标签名称分类，将某一类标签改为统一的CSS样式。
+格式：
+```
+标签名 {
+    属性1: 属性值；
+    属性2: 属性值；
+    属性3: 属性值；
+    ...
+}
+
+```
+优点：能快速的为同一类标签统一设置样式
+缺点：不能设置差异化样式
+### 类选择器
+单独选择一个或几个标签，可以选择类选择器，实现差异化管理样式。
+格式：（定义一个类，哪个标签要用时直接用class属性  调用即可）
+```
+.red（自定义的名字） {
+    color: red;
+}
+...
+<h1 class="red">标题</h1>
+```
+**记忆口诀：样式点定义，结构类（class）调用 ，一个或多个 ，开发最常用**
+**注：不能和标签名相同**
+案例：
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS学习后</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+        }
+        .red {
+            
+            background-color: red;
+        }
+        .green {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="box red"></div>
+    <div class="box green"></div>
+    <div class="box red"></div>
+</body>
+</html>
+
+```
+**多类名的使用**
+```
+<div class="red font35"></div>
+```
+**类名之间以空格隔开**
+**多类名的使用节省了CSS代码，有利于开发时的修改**
+
+### id选择器
+```
+#id名 :{
+	属性一：属性值;
+	...
+}
+...
+<h1 id="id名"> 厉害了</h1>
+```
+**口诀：样式#定义，结构id调用，只能用一次，别人切勿用**
+
+### 通配符选择器
+```
+* {
+	属性值1：属性值；
+	...
+}
+```
+**通配符选择器不用调用，它会将html，body，div，span，li等等的标签属性都修改。**
+**应用场景：(清除所有元素的内外边距)**
+```
+* {
+    margin: 0;
+    padding: 0;
+}
+```
+**基础选择器总结：**
+![在这里插入图片描述](https://img-blog.csdnimg.cn/818143c7f8944849aeaa5546283c6e80.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5ryg4oCT,size_20,color_FFFFFF,t_70,g_se,x_16)
+## 复合选择器
+# 字体属性
+## 字体系列
+字体为**一个属性  font-family**，在相应的花括号设置属性即可。例如：
+```
+h1 {
+	font-family: 'Microsoft YaHei';
+	//也可用'微软雅黑'，中间有空格或者用中文写时，要使用引号引起来。
+}
+```
+**当属性之中有多个字体时，系统会从前向后检测，若电脑上有这种字体，则会被使用，如果都没有，则会使用浏览器默认字体。**
+## 字体大小
+**属性的一种。font-size**
+**格式样例：**
+```
+body {
+    font-size: 16px;
+}
+```
+**标题比较特殊，需要单独设定字体大小**
+## 字体粗细
+**一种属性  font-weight**  
+**属性值**：normal 正常；bold 加粗；bolder 特粗；lighter 特细；
+**实际开发中更常用数字：直接写数字，700等价于bold，400等价于normal。**
+## 文字样式
+**一种属性  font-style**  
+**属性值**：normal  默认值；italic  斜体； 
+## 字体复合属性
+**节约代码**
+**格式：font：font-style font-weight font-size/line-height font-family**
+**顺序不可变，直接写对应的属性值**
+**后两个不可省略，前两个可以省略**
+## 字体属性总结
+![在这里插入图片描述](https://img-blog.csdnimg.cn/680ae81c004b4272ada1d55c508b1f71.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5ryg4oCT,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+# 文本属性
+可定义文本的外观，比如文本的颜色、对齐文本、装饰文本、文本缩进、行间距等。
+## 文本颜色
+color
+我们常用十六进制  #十六进制数
+不常用：blue、red等，rgb（对应值，对应值，对应值）
+
+## 文本对齐
+text-align
+属性值：right，left，center
+
+## 文本缩进
+text-indent
+属性值：常用：相对单位，2em，表示缩进两个字的距离；不常用：直接用像素XXpx。
+## 文本修饰
+text-decoration
+属性值：underline  添加下划线    none 取消下划线    ；不常用：overline 上划线
+## 行高
+line-height
+属性值：XXpx
+# CSS引入方式
+## 行内样式表
+书写方便，权重高，但是结构样式混写，使用较少
+控制范围：一个标签
+## 内部样式表
+部分结构和样式相分离，但是没有彻底分离，使用较多
+控制范围：控制一个页面
+## 外部样式表
+完全实现结构和样式相分离，但需要引入，使用最多，强烈推荐
+控制范围：控制多个页面
