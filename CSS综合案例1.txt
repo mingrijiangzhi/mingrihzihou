@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天气新闻</title>
+    <style>
+        .grey {
+            color: #888888;
+            size: 12px; 
+        }
+        .center {
+           text-align: center;
+        }
+        .decoration {
+            text-decoration: none;
+        }
+        p {
+            text-indent: 2em;
+        }
+        .font {
+            font: 16px/28px 'Microsoft YaHei'
+        }
+        .weight {
+            font-weight: 400;
+        }
+        .search {
+            width: 170px;
+            color: #666;
+        }
+        .btn{
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="font" >
+    <h1 class="center weight">北方高温日达鼎盛 京津冀多地地表温度将超60摄氏度</h1>
+    <div class="grey center">
+        2019-12-2 16:31:17 <a href="#" class="decoration">中国天气网</a>
+        <input type="text"value="请输入查询条件" class="search"> 
+        <input type="button" value="搜索" class="btn">
+    </div>
+    <hr>
+    
+    <p>中国天气网 今天（三日），华北、黄淮多地出现高温天气，截至下午两点，北京田径正如你还记得萨拉卡号发来科技发达哈伦裤发哈卢卡斯京东方哈看见了和付款节点和飞机喀什立法会觉得哈萨克家务活会计师</p>
+    
+    <h4>气温41.4摄氏度！低温66.6摄氏度！北京强势七月首页个高温日</h4>
+    <p>史蒂夫卡机开绿灯发觉看到卡机计划的撒看见了和发动机阿贾克斯电话发来尽快回复黄金海岸的就是离开黄飞鸿返回数据肯定</p>
+    
+    <p class="center"><img src="123.PNG" ></p>
+    <h4>乱敲就完了 对不对有那麽重要吗</h4>
+    <p>阿贾克斯的环境阿喀琉斯较快拉升肯德基暗黑界的是的撒娇卡等哈就开始大数据德哈卡就是的骄傲世界大会上大家库哈斯纠结啊数据返回看似简单罚款受打击啦符号链接为即使对方好看极了很快就会快捷键快乐和两节课离开解开了可兼或健康和计划借款还款时间打火机分类放假啊动画设计开发环境解放和恐惧的u会计师健康的恢复了空间</p>
+    <p>卡降低为环保风机房好舒服啊ask几乎挖金矿就开始发u看见了到付哈数据库和借记卡楼上的回复看来杀害的法律尽快离开洒家开绿灯就撒华为及防护我看数据恢复就是茶水分化瓦解了看见撒旦老夫哈维u老咔叽十五分ask劳动纠纷花完了</p>
+    <p class="grey">作者版权独家拥有</p>
+
+</body>
+</html>
