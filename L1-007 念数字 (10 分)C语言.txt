@@ -1,0 +1,100 @@
+# 题目
+L1-007 念数字 (10 分)
+输入一个整数，输出每个数字对应的拼音。当整数为负数时，先输出fu字。十个数字对应的拼音如下：
+
+0: ling
+1: yi
+2: er
+3: san
+4: si
+5: wu
+6: liu
+7: qi
+8: ba
+9: jiu
+# 代码
+```
+#include<stdio.h>
+int main()
+{
+	char flag[100];
+	int i;
+	scanf("%s",flag);
+	for(i=0;flag[i]!=0;i++){
+		switch(flag[i]){
+			case '-':
+				printf("fu");
+				break;
+			case '0':
+				printf("ling");
+				break;
+			case '1':
+				printf("yi");
+				break;
+			case '2':
+				printf("er");
+				break;
+			case '3':
+				printf("san");
+				break;
+			case '4':
+				printf("si");
+				break;
+			case '5':
+				printf("wu");
+				break;
+			case '6':
+				printf("liu");
+				break;
+			case '7':
+				printf("qi");
+				break;
+			case '8':
+				printf("ba");
+				break;
+			case '9':
+				printf("jiu");
+				break;
+		}
+		break;
+	}
+	for(i+=1;flag[i]!=0;i++){
+		switch(flag[i]){
+			case '-':
+				printf(" fu");
+				break;
+			case '0':
+				printf(" ling");
+				break;
+			case '1':
+				printf(" yi");
+				break;
+			case '2':
+				printf(" er");
+				break;
+			case '3':
+				printf(" san");
+				break;
+			case '4':
+				printf(" si");
+				break;
+			case '5':
+				printf(" wu");
+				break;
+			case '6':
+				printf(" liu");
+				break;
+			case '7':
+				printf(" qi");
+				break;
+			case '8':
+				printf(" ba");
+				break;
+			case '9':
+				printf(" jiu");
+				break;
+		}
+	}
+	
+	return 0;	
+}
