@@ -1,0 +1,31 @@
+# 题目
+有一头母牛，它每年年中生一头小母牛。每头小母牛从第四个年头开始，每年年中也生一头小母牛。请编程实现在第 nn 年的时候（不算第 nn 年出生的小母牛），共有多少头母牛？
+
+输入格式
+输入包括一个整数 n(0 < n < 55)n(0<n<55)。
+
+输出格式
+输出在第 nn 年的时候母牛的数量。
+
+Sample Input
+2
+Sample Output
+2
+Sample Input 2
+5
+Sample Output 2
+6
+# 代码
+```
+#include<stdio.h>
+int main() 
+{
+	int a[60]={1,2,3,4,6};
+	int i;
+	for(i=5;i<56;i++){
+		a[i]=a[i-1]+a[i-3];
+	}
+	int n;
+	scanf("%d",&n);
+	printf("%d",a[n-1]);
+}
