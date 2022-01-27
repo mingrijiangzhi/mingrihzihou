@@ -1,0 +1,77 @@
+# 题目
+L1-025 正整数A+B (15 分)
+题的目标很简单，就是求两个正整数A和B的和，其中A和B都在区间[1,1000]。稍微有点麻烦的是，输入并不保证是两个正整数。
+
+输入格式：
+输入在一行给出A和B，其间以空格分开。问题是A和B不一定是满足要求的正整数，有时候可能是超出范围的数字、负数、带小数点的实数、甚至是一堆乱码。
+
+注意：我们把输入中出现的第1个空格认为是A和B的分隔。题目保证至少存在一个空格，并且B不是一个空字符串。
+
+输出格式：
+如果输入的确是两个正整数，则按格式A + B = 和输出。如果某个输入不合要求，则在相应位置输出?，显然此时和也是?。
+
+输入样例1：
+123 456
+输出样例1：
+123 + 456 = 579
+输入样例2：
+22. 18
+输出样例2：
+? + 18 = ?
+输入样例3：
+-100 blabla bla...33
+输出样例3：
+? + ? = ?
+# 代码
+```
+x=input()
+x=x.split()
+if len(x)==1:
+    a=' '
+    b=x[0]
+else:
+    a=x[0]
+    b=x[1]
+f1=f2=1
+if len(x)>2:
+    f2=0
+c='0123456789'
+if a=='0':
+    if b=='0':
+        f1=f2=0
+    else:
+        f1=0
+else:
+    if b=='0':
+        f2=0
+for i in a:
+    if i not in c:
+        f1=0
+        break
+for i in b:
+    if i not in c:
+        f2=0
+        break
+if f1==0:
+    if f2==0:
+        print("? + ? = ?")
+    elif int(b)>=1 and int(b)<=1000:
+        print("? + %d = ?"%int(b))
+    else:
+        print("? + ? = ?")
+elif f2==0:
+    if int(a) >= 1 and int(a) <= 1000:
+        print("%d + ? = ?" %int(a))
+    else:
+        print("? + ? = ?")
+else:
+    if int(a) >= 1 and int(a) <= 1000:
+        if int(b)>=1 and int(b)<=1000:
+            print("%d + %d = %d" % (int(a),int(b),int(a)+int(b)))
+        else:
+            print("%d + ? = ?" % int(a))
+    else:
+        if int(b) >= 1 and int(b) <= 1000:
+            print("? + %d = ?" % int(b))
+        else:
+            print("? + ? = ?")
