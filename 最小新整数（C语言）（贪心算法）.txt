@@ -1,0 +1,54 @@
+# 题目
+给定一个十进制正整数 n(0 < n < 1000000000)n(0<n<1000000000)，每个数位上数字均不为 00。nn 的位数为 mm。
+现在从 mm 位中删除 kk 位 (0<k < m)(0<k<m)，求生成的新整数最小为多少？
+例如: n = 9128456, k = 2n=9128456,k=2, 则生成的新整数最小为 1245612456。
+
+输入格式
+第一行 tt, 表示有 tt 组数据；
+接下来 tt 行，每一行表示一组测试数据，每组测试数据包含两个数字 n, kn,k。
+
+输出格式
+tt 行，每行一个数字，表示从 nn 中删除 kk 位后得到的最小整数。
+
+Sample Input
+2
+9128456 2
+1444 3
+Sample Output
+12456
+1
+#  代码
+```
+#include<stdio.h>
+#include<string.h>
+int inc(void const*a,void const*b);
+int main()
+{
+	int t,k;
+	char n[200];
+	scanf("%d",&t);
+	while(t--){
+		int i,j,l;
+		scanf("%s %d",n,&k);
+		int len=strlen(n);
+		for(i=0;i<k;i++){
+			for(j=0;j<len-1;j++){
+				if(n[j]>n[j+1]){
+					for(l=j;l<len-1;l++){
+						n[l]=n[l+1];
+					}
+					break;
+				}
+			}
+			len-=1;
+		}
+		for(i=0;i<strlen(n)-k;i++){
+			if(i==0&&n[i]=='0'){
+				continue;
+			}
+			printf("%d",n[i]-'0');
+		}
+		printf("\n");
+	}
+}
+

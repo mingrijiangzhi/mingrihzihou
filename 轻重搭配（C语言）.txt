@@ -1,0 +1,93 @@
+# 题目
+n 个同学去动物园参观，原本每人都需要买一张门票，但售票处推出了一个优惠活动，一个体重为 xx 的人可以和体重至少为 2x2x 配对，这样两人只需买一张票。现在给出了 nn 个人的体重，请你计算他们最少需要买几张门票？
+
+输入格式
+第一行一个整数 nn，表示人数。
+
+第二行 nn 个整数，每个整数 a_ia 
+i
+​	
+  表示每个人的体重。
+
+输出格式
+一个整数，表示最少需要购买的门票数目。
+
+数据范围
+对于 30\%30% 的数据：1 \le n \le 251≤n≤25，1\le a_i \le 1001≤a 
+i
+​	
+ ≤100。
+
+对于 60\%60% 的数据：1 \le n \le 100001≤n≤10000，1\le a_i \le 10001≤a 
+i
+​	
+ ≤1000。
+
+对于 100\%100% 的数据：1 \le n \le 5\cdot 10^51≤n≤5⋅10 
+5
+ ，1\le a_i \le 10^51≤a 
+i
+​	
+ ≤10 
+5
+ 。
+
+样例解释
+11 和 99 配对，77 和 33 配对，剩下 5,55,5 单独，一共买四张票。
+
+Sample Input
+6
+1 9 7 3 5 5
+Sample Output
+4
+# 代码
+```
+#include<stdio.h>
+#include<stdlib.h>
+void quicksort(int *a,int low,int high);
+int main() 
+{
+	int a[500005],i,j,sum,t;
+	int n;
+	scanf("%d",&n);
+	sum=n;
+	for(i=0;i<n;i++){
+		scanf("%d",&a[i]);
+	}
+	quicksort(a,0,n-1);
+	t=(sum+1)/2;
+	for(i=0;i<(n+1)/2;i++){
+		for(j=t;j<n;j++){
+			if(a[i]*2<=a[j]){
+				sum-=1;
+				t=j+1;
+				break;
+			}
+		}
+	}
+	printf("%d",sum);
+	return 0;
+}
+void quicksort(int *a,int low,int high)
+{
+	if(low>=high){
+		return;
+	}
+	int left=low;
+	int right=high;
+	int t=a[left];
+	while(left<right){
+		while(left<right&&a[right]>=t){
+			right--;
+		}
+		a[left]=a[right];
+		while(left<right&&a[left]<=t){
+			left++;
+		}
+		a[right]=a[left];
+	}
+	a[right]=t;
+	quicksort(a,low,left-1);
+	quicksort(a,left+1,high);
+	
+}
