@@ -1,0 +1,107 @@
+# 题目
+在 n\times nn×n 的格子上有 mm 个地毯。
+
+给出这些地毯的信息，问每个点被多少个地毯覆盖。
+
+输入格式
+第一行，两个正整数 n\ (1\le n \le 1000)n (1≤n≤1000)、m\ (1\le m \le 10^5)m (1≤m≤10 
+5
+ )，意义如题所述。
+
+接下来 mm 行，每行两个坐标 (x_1,y_1)(x 
+1
+​	
+ ,y 
+1
+​	
+ ) 和 (x_2,y_2)(x 
+2
+​	
+ ,y 
+2
+​	
+ )，代表一块地毯，左上角是 (x_1,y_1)(x 
+1
+​	
+ ,y 
+1
+​	
+ )，右下角是 (x_2,y_2)(x 
+2
+​	
+ ,y 
+2
+​	
+ )。
+
+输出格式
+输出 nn 行，每行 nn 个正整数。
+
+第 ii 行第 jj 列的正整数表示 (i,j)(i,j) 这个格子被多少个地毯覆盖。
+
+Sample 1
+Inputcopy	Outputcopy
+4 3
+1 1 3 3
+2 2 4 4
+3 1 4 3
+1 1 1 0
+1 2 2 1
+2 3 3 1
+1 2 2 1
+# 代码
+~~~
+#include<stdio.h>
+int a[1005][1005]={0};
+int d0[1005][1005]={0};
+void biaoji(int (*d0)[1005]);
+void shengcheng(int(*a)[1005],int n);
+int main() 
+{
+	int n,m,i,j;
+	
+	scanf("%d %d",&n,&m);
+	while(m--){
+		biaoji(d0);
+	}
+	shengcheng(a,n);
+	for(i=1;i<n+1;i++){
+		for(j=1;j<n+1;j++){
+			printf("%d ",a[i][j]);
+			if(j==n){
+				printf("\n");
+			}
+		}
+	}
+	return 0;
+}
+void biaoji(int (*d0)[1005])
+{
+	int x1,y1,x2,y2;
+	scanf("%d%d%d%d",&x1,&y1,&x2,&y2);
+	d0[x1][y1]+=1;
+	d0[x2+1][y1]-=1;
+	d0[x1][y2+1]-=1;
+	d0[x2+1][y2+1]+=1;
+}
+void shengcheng(int(*a)[1005],int n)
+{
+	int i,j;
+	for(i=1;i<n+1;i++){
+		for(j=1;j<n+1;j++){
+			a[i][j]+=d0[i][j];
+		}
+	}
+	for(i=1;i<=n;i++){
+		a[i][1]=a[i-1][1]+a[i][1];
+	}
+	for(j=1;j<=n;j++){
+		a[1][j]=a[1][j-1]+a[1][j];
+	}
+	for(i=2;i<n+1;i++){
+		for(j=2;j<n+1;j++){
+			a[i][j]=a[i][j]+a[i][j-1]+a[i-1][j]-a[i-1][j-1];
+		}
+	}
+	
+}
