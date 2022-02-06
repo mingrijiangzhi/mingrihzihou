@@ -1,0 +1,150 @@
+# 题目
+L2-004 这是二叉搜索树吗？ (25 分)
+一棵二叉搜索树可被递归地定义为具有下列性质的二叉树：对于任一结点，
+
+其左子树中所有结点的键值小于该结点的键值；
+其右子树中所有结点的键值大于等于该结点的键值；
+其左右子树都是二叉搜索树。
+所谓二叉搜索树的“镜像”，即将所有结点的左右子树对换位置后所得到的树。
+
+给定一个整数键值序列，现请你编写程序，判断这是否是对一棵二叉搜索树或其镜像进行前序遍历的结果。
+
+输入格式：
+输入的第一行给出正整数 N（≤1000）。随后一行给出 N 个整数键值，其间以空格分隔。
+
+输出格式：
+如果输入序列是对一棵二叉搜索树或其镜像进行前序遍历的结果，则首先在一行中输出 YES ，然后在下一行输出该树后序遍历的结果。数字间有 1 个空格，一行的首尾不得有多余空格。若答案是否，则输出 NO。
+
+输入样例 1：
+7
+8 6 5 7 10 8 11
+输出样例 1：
+YES
+5 7 6 8 11 10 8
+输入样例 2：
+7
+8 10 11 8 6 7 5
+输出样例 2：
+YES
+11 8 10 7 5 6 8
+输入样例 3：
+7
+8 6 8 5 10 9 11
+输出样例 3：
+NO
+# 注意点
+**测试点5：镜像和原二叉树相同**
+# 代码
+~~~
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct tree{
+	int data;
+	struct tree*left;
+	struct tree*right;
+}node,*re;
+re a=NULL,b=NULL;
+int c[1005];
+int f=0;
+re create(re a,int data);
+re create1(re b,int data);
+void first(re t);
+void last(re t);
+int main()
+{
+	int t;
+	int n;
+	int f1=1,f2=1,i,j;
+	int d[1005];
+	scanf("%d",&n);
+	for(i=0;i<n;i++){
+		scanf("%d",&d[i]);
+		a=create(a,d[i]);
+		b=create1(b,d[i]);
+	}
+	first(a);
+	f=0;
+	for(i=0;i<n;i++){
+		if(d[i]!=c[i]){
+			f1=0;
+			break;
+		}
+	}
+	first(b);
+	f=0;
+	for(i=0;i<n;i++){
+		if(d[i]!=c[i]){
+			f2=0;
+			break;	
+		};
+	}
+	if(f1==0&&f2==0){
+		printf("NO");
+	}else{
+		if(f1==1&&f2==0){
+			last(a);
+		}
+		if(f1==0&&f2==1){
+			last(b);
+		}
+		if(f1==1&&f2==1){
+			last(a);
+		}
+		printf("YES\n");
+		printf("%d",c[0]);
+		for(i=1;i<n;i++){
+			printf(" %d",c[i]);
+		}
+	}
+	return 0;
+}
+re create(re a,int data)
+{
+	if(a==NULL){
+		a=(re)malloc(sizeof(node));
+		a->data=data;
+		a->left=NULL;
+		a->right=NULL;
+	}else{
+		if(data<a->data){
+			a->left=create(a->left,data);
+		}
+		if(data>=a->data){
+			a->right=create(a->right,data);
+		}
+	}
+	return a;
+}
+re create1(re b,int data)
+{
+	if(b==NULL){
+		b=(re)malloc(sizeof(node));
+		b->data=data;
+		b->left=NULL;
+		b->right=NULL;
+	}else{
+		if(data>=b->data){
+			b->left=create1(b->left,data);
+		}
+		if(data<b->data){
+			b->right=create1(b->right,data);
+		}
+	}
+	return b;
+}
+void first(re t){
+	if(t!=NULL){
+		c[f]=t->data;
+		f++;
+		first(t->left);
+		first(t->right);
+	}	
+}
+void last(re t){
+	if(t!=NULL){
+		last(t->left);
+		last(t->right);
+		c[f]=t->data;
+		f++;
+	}	
+}
