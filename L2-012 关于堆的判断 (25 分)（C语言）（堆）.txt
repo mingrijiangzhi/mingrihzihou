@@ -1,0 +1,118 @@
+# 题目
+L2-012 关于堆的判断 (25 分)
+将一系列给定数字顺序插入一个初始为空的小顶堆H[]。随后判断一系列相关命题是否为真。命题分下列几种：
+
+x is the root：x是根结点；
+x and y are siblings：x和y是兄弟结点；
+x is the parent of y：x是y的父结点；
+x is a child of y：x是y的一个子结点。
+输入格式：
+每组测试第1行包含2个正整数N（≤ 1000）和M（≤ 20），分别是插入元素的个数、以及需要判断的命题数。下一行给出区间[−10000,10000]内的N个要被插入一个初始为空的小顶堆的整数。之后M行，每行给出一个命题。题目保证命题中的结点键值都是存在的。
+
+输出格式：
+对输入的每个命题，如果其为真，则在一行中输出T，否则输出F。
+
+输入样例：
+5 4
+46 23 26 24 10
+24 is the root
+26 and 23 are siblings
+46 is the parent of 23
+23 is a child of 10
+输出样例：
+F
+T
+F
+T
+# 思路
+**写这道题，首先要清楚什么是堆。
+堆分为大顶堆（大根堆）和小顶堆（小根堆）。首先，堆一定是一个完全二叉树，其次它的父节点大于或等于子节点（小于或等于子节点）。
+完全二叉树：对于一个n层的二叉树，只有第n-1层的父节点的子节点可以不为两个，并且如果有子节点必须位于左边。这种二叉树被称为完全二叉树。
+然后，堆可以用数组来存储，假如从下标为1开始存储，（就小顶堆而言）已知子节点下标为x，父节点下标为x/2.已知父节点，则两个子节点下标为x*2和x*2+1。**
+**然后对于该题的判断，则直接一个一个的输入字符串，通过判断首字母，来作出具体判断，详细见代码。**
+
+# 代码
+~~~·
+#include<stdio.h>
+int d[20010];
+int a[20010];
+int cnt=0;
+void create(int x);
+int main()
+{
+	int n,m;
+	scanf("%d %d",&n,&m);
+	int key;
+	for(int i=0;i<n;i++){
+		scanf("%d",&key);
+		create(key);
+	}
+	for(int i=1;i<20010;i++){
+		a[d[i]+10000]=i;
+	}
+	while(m--){
+		int x,y;
+		char s[50];
+		scanf("%d",&x);
+		x+=10000;
+		scanf("%s",s);
+		if(s[0]=='a'){
+			scanf("%d",&y);
+			y+=10000;
+			if(a[x]/2==a[y]/2){
+				printf("T\n");
+			}else{
+				printf("F\n");
+			}
+			gets(s);
+		}else{
+			scanf("%s",s);
+			if(s[0]=='a'){
+				scanf("%s %s",s,s);
+				scanf("%d",&y);
+				y+=10000;
+				if(a[x]/2==a[y]){
+					printf("T\n");
+				}else{
+					printf("F\n");
+				}
+			}else{
+				scanf("%s",s);
+				if(s[0]=='r'){
+					if(a[x]==1){
+						printf("T\n");
+					}else{
+						printf("F\n");
+					}	
+				}
+				if(s[0]=='p'){
+					scanf("%s",s);
+					scanf("%d",&y);
+					y+=10000;
+					if(a[y]/2==a[x]){
+						printf("T\n");
+					}else{
+						printf("F\n");
+					}
+				}
+			}
+		}
+		
+		
+		
+		
+	}
+	return 0;
+}
+void create(int x)
+{
+	cnt++;
+	d[cnt]=x;
+	int t=cnt;
+	while(t>1&&d[t]<d[t/2]){
+		d[t]=d[t/2];
+		d[t/2]=x;
+		t/=2;
+	}
+	d[t]=x;
+}
