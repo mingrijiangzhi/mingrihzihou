@@ -1,0 +1,68 @@
+# 题目
+L2-017 人以群分 (25 分)
+社交网络中我们给每个人定义了一个“活跃度”，现希望根据这个指标把人群分为两大类，即外向型（outgoing，即活跃度高的）和内向型（introverted，即活跃度低的）。要求两类人群的规模尽可能接近，而他们的总活跃度差距尽可能拉开。
+
+输入格式：
+输入第一行给出一个正整数N（2≤N≤10 
+5
+ ）。随后一行给出N个正整数，分别是每个人的活跃度，其间以空格分隔。题目保证这些数字以及它们的和都不会超过2 
+31
+ 。
+
+输出格式：
+按下列格式输出：
+
+Outgoing #: N1
+Introverted #: N2
+Diff = N3
+其中N1是外向型人的个数；N2是内向型人的个数；N3是两群人总活跃度之差的绝对值。
+
+输入样例1：
+10
+23 8 10 99 46 2333 46 1 666 555
+输出样例1：
+Outgoing #: 5
+Introverted #: 5
+Diff = 3611
+输入样例2：
+13
+110 79 218 69 3721 100 29 135 2 6 13 5188 85
+输出样例2：
+Outgoing #: 7
+Introverted #: 6
+Diff = 9359
+# 思路
+**哦，25分的题又给大家发福利了。简单的排序，然后分为两个群体，如果总人数是奇数，外相比内向多一人；偶数的话人数相等。排序后加和做差输出即可。不过考率到数据数量，最好还是用快排这些时间复杂度较低的方法来排序，否则会超时。**
+# 代码
+~~~·
+#include<stdio.h>
+#include<stdlib.h>
+int a[100005];
+int inc(void const*a,void const*b);
+int main()
+{
+	int n;
+	scanf("%d",&n);
+	int sum1=0,sum2=0,cnt1=0,cnt2=0;
+	int i;
+	for(i=0;i<n;i++){
+		scanf("%d",&a[i]);
+	}
+	qsort(a,n,sizeof(a[0]),inc);
+	for(i=0;i<n/2;i++){
+		sum1+=a[i];
+		cnt1++;
+	}
+	for(i=n/2;i<n;i++){
+		sum2+=a[i];
+		cnt2++;
+	}
+	printf("Outgoing #: %d\n",cnt2);
+	printf("Introverted #: %d\n",cnt1);
+	printf("Diff = %d\n",sum2-sum1);
+	return 0;
+} 
+int inc(void const*a,void const*b)
+{
+	return *(int*)a-*(int*)b;
+}
