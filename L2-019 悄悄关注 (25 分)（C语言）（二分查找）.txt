@@ -1,0 +1,117 @@
+# 题目
+L2-019 悄悄关注 (25 分)
+新浪微博上有个“悄悄关注”，一个用户悄悄关注的人，不出现在这个用户的关注列表上，但系统会推送其悄悄关注的人发表的微博给该用户。现在我们来做一回网络侦探，根据某人的关注列表和其对其他用户的点赞情况，扒出有可能被其悄悄关注的人。
+
+输入格式：
+输入首先在第一行给出某用户的关注列表，格式如下：
+
+人数N 用户1 用户2 …… 用户N
+其中N是不超过5000的正整数，每个用户i（i=1, ..., N）是被其关注的用户的ID，是长度为4位的由数字和英文字母组成的字符串，各项间以空格分隔。
+
+之后给出该用户点赞的信息：首先给出一个不超过10000的正整数M，随后M行，每行给出一个被其点赞的用户ID和对该用户的点赞次数（不超过1000），以空格分隔。注意：用户ID是一个用户的唯一身份标识。题目保证在关注列表中没有重复用户，在点赞信息中也没有重复用户。
+
+输出格式：
+我们认为被该用户点赞次数大于其点赞平均数、且不在其关注列表上的人，很可能是其悄悄关注的人。根据这个假设，请你按用户ID字母序的升序输出可能是其悄悄关注的人，每行1个ID。如果其实并没有这样的人，则输出“Bing Mei You”。
+
+输入样例1：
+10 GAO3 Magi Zha1 Sen1 Quan FaMK LSum Eins FatM LLao
+8
+Magi 50
+Pota 30
+LLao 3
+Ammy 48
+Dave 15
+GAO3 31
+Zoro 1
+Cath 60
+输出样例1：
+Ammy
+Cath
+Pota
+输入样例2：
+11 GAO3 Magi Zha1 Sen1 Quan FaMK LSum Eins FatM LLao Pota
+7
+Magi 50
+Pota 30
+LLao 48
+Ammy 3
+Dave 15
+GAO3 31
+Zoro 29
+输出样例2：
+Bing Mei You
+# 思路
+**将原来关注的人通过id排序，对点赞的人进行遍历，如果点赞数大于平均数，则利用二分查找看原来关注的人中有没有这个人，没有就将他存储起来，有就结束本次查找；最后按题目要求输出即可。**
+# 代码
+~~~·
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+ 
+struct people{
+	char id[10];
+	int num;
+}a[10005];
+int flag=0,cnt=0;
+char b1[5005][10],b2[5005][10];
+void find(int m,char*b);
+int inc(void const*a,void const*b);
+
+int main()
+{
+	int n,m;
+	int i;
+	scanf("%d",&n);
+	for(i=0;i<n;i++){
+		scanf("%s",b1[i]);
+	}
+	scanf("%d",&m);
+	int sum=0;
+	for(i=0;i<m;i++){
+		scanf("%s %d",a[i].id,&a[i].num);
+		sum+=a[i].num;
+	}
+	int aver=sum/m;
+	qsort(b1,n,sizeof(b1[0]),inc); 
+	for(i=0;i<m;i++){
+		if(a[i].num>aver){
+			flag=0;
+			find(n,a[i].id);
+		}
+	}
+	qsort(b2,cnt,sizeof(b2[0]),inc);
+	for(i=0;i<cnt;i++){
+		printf("%s\n",b2[i]);
+	}
+	if(cnt==0){
+		printf("Bing Mei You");
+	}
+	return 0;
+ } 
+int inc(void const*a,void const*b)
+{
+	char *p=(char*)a;
+	char *q=(char*)b;
+	return strcmp(p,q);
+}
+void find(int n,char*b)
+{
+	int left=0,right=n-1,mid;
+	while(left<=right){
+		mid=left+(right-left)/2;
+		if(strcmp(b1[mid],b)>0){
+			right=mid-1;
+		}else{
+			if((strcmp(b1[mid],b)<0)){
+				left=mid+1;
+			}else{
+				flag=1;
+				break;
+			}
+		}
+	}
+	if(flag==0){
+		strcpy(b2[cnt],b);
+		cnt++;
+	}
+}
